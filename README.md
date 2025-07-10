@@ -3,428 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Resize Tool for Blogger</title>
+    <title>DailyToolBox - 100+ Free Online Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+        :root {
+            --primary: #4361ee;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #6c757d;
         }
-        .container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 25px;
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #4285f4;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .upload-area {
-            border: 2px dashed #ccc;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .upload-area:hover {
-            border-color: #4285f4;
-            background-color: #f8faff;
-        }
-        .upload-area.active {
-            border-color: #0f9d58;
-            background-color: #e6f4ea;
-        }
-        #fileInput {
-            display: none;
-        }
-        .btn {
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 5px;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #3367d6;
-        }
-        .btn-secondary {
-            background-color: #f1f1f1;
-            color: #333;
-        }
-        .btn-secondary:hover {
-            background-color: #ddd;
-        }
-        .controls {
-            margin: 20px 0;
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
             align-items: center;
         }
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            min-width: 150px;
+        
+        .logo i {
+            margin-right: 10px;
         }
-        label {
-            margin-bottom: 5px;
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
             font-weight: 500;
         }
-        input[type="number"], select {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .preview-container {
+        
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        /* Tool Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        .dark-mode .category-card {
+            background: #1e1e1e;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
         }
-        #preview {
-            max-width: 100%;
-            max-height: 400px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        
+        .category-title i {
+            margin-right: 10px;
+            font-size: 1.5rem;
         }
-        .file-info {
-            margin: 10px 0;
-            font-size: 14px;
-            color: #666;
+        
+        .tools-list {
+            list-style-type: none;
         }
-        .quality-control {
+        
+        .tools-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dark-mode .tools-list li {
+            border-bottom: 1px solid #333;
+        }
+        
+        .tools-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .tools-list a {
+            color: var(--gray);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
-        #qualitySlider {
-            flex-grow: 1;
+        
+        .dark-mode .tools-list a {
+            color: #aaa;
         }
-        .loading {
-            display: none;
+        
+        .tools-list a:hover {
+            color: var(--primary);
+        }
+        
+        .tools-list i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
             text-align: center;
-            margin: 20px 0;
+            margin-top: 3rem;
         }
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid #4285f4;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
         }
-        .error {
-            color: #d32f2f;
-            margin: 10px 0;
-            text-align: center;
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-toolbox"></i>
+            <span>DailyToolBox</span>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">All Tools</a>
+            <a href="#">Categories</a>
+            <a href="#">Contact</a>
+        </nav>
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+    
     <div class="container">
-        <h1>Photo Resize Tool</h1>
+        <h1>100+ Free Online Tools for Daily Use</h1>
+        <p>All-in-one solution for your PDF, image, video, text and other conversion needs</p>
         
-        <div class="upload-area" id="uploadArea">
-            <p><i class="icon">📁</i></p>
-            <p>Drag & drop your image here or click to browse</p>
-            <input type="file" id="fileInput" accept="image/jpeg, image/png, image/jpg">
-            <button class="btn" id="selectBtn">Select Image</button>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for any tool...">
         </div>
         
-        <div class="file-info" id="fileInfo">No file selected</div>
-        
-        <div class="controls">
-            <div class="control-group">
-                <label for="width">Width (px)</label>
-                <input type="number" id="width" placeholder="Auto" min="1">
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- PDF Tools -->
+            <div class="category-card" onclick="location.href='pdf-tools.html'">
+                <h2 class="category-title"><i class="fas fa-file-pdf"></i> PDF Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="pdf-to-word.html"><i class="fas fa-arrow-right"></i> PDF to Word</a></li>
+                    <li><a href="word-to-pdf.html"><i class="fas fa-arrow-right"></i> Word to PDF</a></li>
+                    <li><a href="pdf-compressor.html"><i class="fas fa-arrow-right"></i> PDF Compressor</a></li>
+                    <li><a href="merge-pdf.html"><i class="fas fa-arrow-right"></i> Merge PDF</a></li>
+                    <li><a href="split-pdf.html"><i class="fas fa-arrow-right"></i> Split PDF</a></li>
+                </ul>
             </div>
             
-            <div class="control-group">
-                <label for="height">Height (px)</label>
-                <input type="number" id="height" placeholder="Auto" min="1">
+            <!-- Image Tools -->
+            <div class="category-card" onclick="location.href='image-tools.html'">
+                <h2 class="category-title"><i class="fas fa-image"></i> Image Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="image-resizer.html"><i class="fas fa-arrow-right"></i> Image Resizer</a></li>
+                    <li><a href="jpg-to-png.html"><i class="fas fa-arrow-right"></i> JPG to PNG</a></li>
+                    <li><a href="image-compressor.html"><i class="fas fa-arrow-right"></i> Image Compressor</a></li>
+                    <li><a href="background-remover.html"><i class="fas fa-arrow-right"></i> Background Remover</a></li>
+                    <li><a href="webp-converter.html"><i class="fas fa-arrow-right"></i> WebP Converter</a></li>
+                </ul>
             </div>
             
-            <div class="control-group">
-                <label for="format">Output Format</label>
-                <select id="format">
-                    <option value="original">Original</option>
-                    <option value="jpeg">JPEG</option>
-                    <option value="png">PNG</option>
-                    <option value="webp">WebP</option>
-                </select>
+            <!-- Video & Audio Tools -->
+            <div class="category-card" onclick="location.href='video-tools.html'">
+                <h2 class="category-title"><i class="fas fa-video"></i> Video & Audio Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="youtube-downloader.html"><i class="fas fa-arrow-right"></i> YouTube Downloader</a></li>
+                    <li><a href="mp4-to-mp3.html"><i class="fas fa-arrow-right"></i> MP4 to MP3</a></li>
+                    <li><a href="video-compressor.html"><i class="fas fa-arrow-right"></i> Video Compressor</a></li>
+                    <li><a href="audio-cutter.html"><i class="fas fa-arrow-right"></i> Audio Cutter</a></li>
+                </ul>
             </div>
             
-            <div class="control-group" id="qualityControl" style="display:none;">
-                <label for="quality">Quality</label>
-                <div class="quality-control">
-                    <input type="range" id="qualitySlider" min="1" max="100" value="85">
-                    <span id="qualityValue">85%</span>
-                </div>
+            <!-- Text & AI Tools -->
+            <div class="category-card" onclick="location.href='text-tools.html'">
+                <h2 class="category-title"><i class="fas fa-keyboard"></i> Text & AI Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="paraphraser.html"><i class="fas fa-arrow-right"></i> Paraphraser</a></li>
+                    <li><a href="grammar-checker.html"><i class="fas fa-arrow-right"></i> Grammar Checker</a></li>
+                    <li><a href="text-summarizer.html"><i class="fas fa-arrow-right"></i> Text Summarizer</a></li>
+                    <li><a href="text-to-speech.html"><i class="fas fa-arrow-right"></i> Text to Speech</a></li>
+                </ul>
             </div>
             
-            <div class="control-group">
-                <label>Actions</label>
-                <div>
-                    <button class="btn" id="resizeBtn" disabled>Resize</button>
-                    <button class="btn btn-secondary" id="resetBtn">Reset</button>
-                </div>
+            <!-- Developer Tools -->
+            <div class="category-card" onclick="location.href='developer-tools.html'">
+                <h2 class="category-title"><i class="fas fa-code"></i> Developer Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="json-formatter.html"><i class="fas fa-arrow-right"></i> JSON Formatter</a></li>
+                    <li><a href="regex-tester.html"><i class="fas fa-arrow-right"></i> Regex Tester</a></li>
+                    <li><a href="html-formatter.html"><i class="fas fa-arrow-right"></i> HTML Formatter</a></li>
+                    <li><a href="base64-converter.html"><i class="fas fa-arrow-right"></i> Base64 Converter</a></li>
+                </ul>
             </div>
-        </div>
-        
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Processing image...</p>
-        </div>
-        
-        <div class="error" id="error"></div>
-        
-        <div class="preview-container" id="previewContainer" style="display:none;">
-            <h3>Preview</h3>
-            <img id="preview" src="" alt="Resized preview">
-            <button class="btn" id="downloadBtn">Download Image</button>
+            
+            <!-- SEO Tools -->
+            <div class="category-card" onclick="location.href='seo-tools.html'">
+                <h2 class="category-title"><i class="fas fa-search"></i> SEO Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="keyword-extractor.html"><i class="fas fa-arrow-right"></i> Keyword Extractor</a></li>
+                    <li><a href="meta-tag-generator.html"><i class="fas fa-arrow-right"></i> Meta Tag Generator</a></li>
+                    <li><a href="plagiarism-checker.html"><i class="fas fa-arrow-right"></i> Plagiarism Checker</a></li>
+                    <li><a href="title-generator.html"><i class="fas fa-arrow-right"></i> Title Generator</a></li>
+                </ul>
+            </div>
+            
+            <!-- Converter & Calculators -->
+            <div class="category-card" onclick="location.href='converter-tools.html'">
+                <h2 class="category-title"><i class="fas fa-calculator"></i> Converters & Calculators</h2>
+                <ul class="tools-list">
+                    <li><a href="currency-converter.html"><i class="fas fa-arrow-right"></i> Currency Converter</a></li>
+                    <li><a href="unit-converter.html"><i class="fas fa-arrow-right"></i> Unit Converter</a></li>
+                    <li><a href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a></li>
+                    <li><a href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a></li>
+                </ul>
+            </div>
+            
+            <!-- Miscellaneous Tools -->
+            <div class="category-card" onclick="location.href='misc-tools.html'">
+                <h2 class="category-title"><i class="fas fa-random"></i> Miscellaneous Tools</h2>
+                <ul class="tools-list">
+                    <li><a href="qr-generator.html"><i class="fas fa-arrow-right"></i> QR Code Generator</a></li>
+                    <li><a href="password-generator.html"><i class="fas fa-arrow-right"></i> Password Generator</a></li>
+                    <li><a href="world-clock.html"><i class="fas fa-arrow-right"></i> World Clock</a></li>
+                    <li><a href="speed-test.html"><i class="fas fa-arrow-right"></i> Internet Speed Test</a></li>
+                </ul>
+            </div>
         </div>
     </div>
+    
+    <footer>
+        <p>© 2023 DailyToolBox. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Feedback</a>
+        </div>
+        <p>Made with <i class="fas fa-heart" style="color:red"></i> for everyone</p>
+    </footer>
 
     <script>
-        // DOM elements
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const selectBtn = document.getElementById('selectBtn');
-        const fileInfo = document.getElementById('fileInfo');
-        const widthInput = document.getElementById('width');
-        const heightInput = document.getElementById('height');
-        const formatSelect = document.getElementById('format');
-        const qualityControl = document.getElementById('qualityControl');
-        const qualitySlider = document.getElementById('qualitySlider');
-        const qualityValue = document.getElementById('qualityValue');
-        const resizeBtn = document.getElementById('resizeBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const loading = document.getElementById('loading');
-        const error = document.getElementById('error');
-        const previewContainer = document.getElementById('previewContainer');
-        const preview = document.getElementById('preview');
-        const downloadBtn = document.getElementById('downloadBtn');
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
         
-        // Variables
-        let originalImage = null;
-        let resizedImageBlob = null;
-        let originalFileName = '';
-        let originalFileType = '';
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
         
-        // Event listeners
-        selectBtn.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', handleFileSelect);
-        uploadArea.addEventListener('dragover', handleDragOver);
-        uploadArea.addEventListener('dragleave', handleDragLeave);
-        uploadArea.addEventListener('drop', handleDrop);
-        formatSelect.addEventListener('change', handleFormatChange);
-        qualitySlider.addEventListener('input', updateQualityValue);
-        resizeBtn.addEventListener('click', resizeImage);
-        resetBtn.addEventListener('click', resetTool);
-        downloadBtn.addEventListener('click', downloadImage);
-        
-        // Functions
-        function handleFileSelect(e) {
-            const file = e.target.files[0] || (e.dataTransfer && e.dataTransfer.files[0]);
-            if (!file) return;
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
             
-            if (!file.type.match('image.*')) {
-                showError('Please select an image file (JPEG, PNG)');
-                return;
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
-            
-            processImageFile(file);
-        }
+        });
         
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            uploadArea.classList.add('active');
-        }
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const categoryCards = document.querySelectorAll('.category-card');
         
-        function handleDragLeave(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            uploadArea.classList.remove('active');
-        }
-        
-        function handleDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            uploadArea.classList.remove('active');
-            handleFileSelect(e);
-        }
-        
-        function handleFormatChange() {
-            const format = formatSelect.value;
-            qualityControl.style.display = (format === 'jpeg' || format === 'webp') ? 'block' : 'none';
-        }
-        
-        function updateQualityValue() {
-            qualityValue.textContent = `${qualitySlider.value}%`;
-        }
-        
-        function processImageFile(file) {
-            originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
-            originalFileType = file.type.split('/')[1];
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
             
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                originalImage = new Image();
-                originalImage.onload = function() {
-                    fileInfo.textContent = `${file.name} (${originalImage.width}×${originalImage.height}px, ${formatBytes(file.size)})`;
-                    widthInput.placeholder = originalImage.width;
-                    heightInput.placeholder = originalImage.height;
-                    resizeBtn.disabled = false;
-                    
-                    // Set default format to original
-                    formatSelect.value = 'original';
-                    handleFormatChange();
-                };
-                originalImage.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-        
-        function resizeImage() {
-            if (!originalImage) {
-                showError('No image selected');
-                return;
-            }
-            
-            loading.style.display = 'block';
-            error.textContent = '';
-            previewContainer.style.display = 'none';
-            
-            // Get dimensions
-            let width = widthInput.value ? parseInt(widthInput.value) : originalImage.width;
-            let height = heightInput.value ? parseInt(heightInput.value) : originalImage.height;
-            
-            // Maintain aspect ratio if only one dimension is provided
-            if (widthInput.value && !heightInput.value) {
-                height = Math.round((width / originalImage.width) * originalImage.height);
-                heightInput.value = height;
-            } else if (!widthInput.value && heightInput.value) {
-                width = Math.round((height / originalImage.height) * originalImage.width);
-                widthInput.value = width;
-            }
-            
-            // Create canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            
-            // Draw image on canvas
-            ctx.drawImage(originalImage, 0, 0, width, height);
-            
-            // Process in small timeout to allow UI to update
-            setTimeout(() => {
-                let mimeType;
-                let quality = 0.85; // Default quality
+            categoryCards.forEach(card => {
+                const title = card.querySelector('.category-title').textContent.toLowerCase();
+                const tools = card.querySelectorAll('.tools-list a');
+                let hasMatch = false;
                 
-                // Determine output format
-                const format = formatSelect.value === 'original' ? originalFileType : formatSelect.value;
-                
-                switch(format) {
-                    case 'jpeg':
-                    case 'jpg':
-                        mimeType = 'image/jpeg';
-                        quality = parseInt(qualitySlider.value) / 100;
-                        break;
-                    case 'png':
-                        mimeType = 'image/png';
-                        break;
-                    case 'webp':
-                        mimeType = 'image/webp';
-                        quality = parseInt(qualitySlider.value) / 100;
-                        break;
-                    default:
-                        mimeType = 'image/jpeg';
+                // Check if title matches
+                if (title.includes(searchTerm)) {
+                    hasMatch = true;
                 }
                 
-                // Convert to blob
-                canvas.toBlob(blob => {
-                    loading.style.display = 'none';
-                    
-                    if (!blob) {
-                        showError('Error processing image');
-                        return;
+                // Check if any tool matches
+                tools.forEach(tool => {
+                    const toolText = tool.textContent.toLowerCase();
+                    if (toolText.includes(searchTerm)) {
+                        hasMatch = true;
+                        tool.style.fontWeight = 'bold';
+                        tool.style.color = 'var(--primary)';
+                    } else {
+                        tool.style.fontWeight = 'normal';
+                        tool.style.color = '';
                     }
-                    
-                    resizedImageBlob = blob;
-                    preview.src = URL.createObjectURL(blob);
-                    previewContainer.style.display = 'flex';
-                    
-                    // Update file info with new size
-                    fileInfo.textContent = `${fileInfo.textContent} → Resized to ${width}×${height}px (${formatBytes(blob.size)})`;
-                    
-                }, mimeType, quality);
-            }, 100);
-        }
+                });
+                
+                // Show/hide category based on match
+                card.style.display = hasMatch ? 'block' : 'none';
+            });
+        });
         
-        function downloadImage() {
-            if (!resizedImageBlob) return;
-            
-            const format = formatSelect.value === 'original' ? originalFileType : formatSelect.value;
-            const extension = format === 'jpg' ? 'jpeg' : format;
-            const url = URL.createObjectURL(resizedImageBlob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${originalFileName}_resized.${extension}`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-        
-        function resetTool() {
-            fileInput.value = '';
-            originalImage = null;
-            resizedImageBlob = null;
-            fileInfo.textContent = 'No file selected';
-            widthInput.value = '';
-            heightInput.value = '';
-            formatSelect.value = 'original';
-            qualitySlider.value = '85';
-            qualityValue.textContent = '85%';
-            resizeBtn.disabled = true;
-            loading.style.display = 'none';
-            error.textContent = '';
-            previewContainer.style.display = 'none';
-            preview.src = '';
-            handleFormatChange();
-        }
-        
-        function showError(message) {
-            error.textContent = message;
-        }
-        
-        function formatBytes(bytes) {
-            if (!bytes) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
-        }
+        // Make entire category card clickable
+        categoryCards.forEach(card => {
+            card.style.cursor = 'pointer';
+        });
     </script>
 </body>
 </html>
